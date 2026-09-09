@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪞 Gitea GitHub Mirror
+# Gitea GitHub Mirror
 
 **Bulk mirror all your GitHub repositories to a self-hosted Gitea instance — concurrent, strict, reliable.**
 
@@ -21,47 +21,47 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 **Gitea GitHub Mirror** is a zero-dependency Python CLI tool that discovers every repository under your GitHub account — public, private, forked, organization, and collaborator repos — and creates **pull-mirror clones** on your self-hosted [Gitea](https://gitea.io) instance.
 
 Once configured, Gitea will **automatically sync** from GitHub on a schedule (default: every 8 hours), keeping your self-hosted backup always up-to-date without any manual intervention.
 
-### ✨ Key Features
+### Key Features
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **Auto-Discovery** | Scans all repos via GitHub API (owner + org + collaborator) |
-| 🧲 **Incremental Sync** | Skips healthy repos on Gitea; auto-repairs broken mirrors |
-| 🔧 **Mirror Health Check** | Detects empty shells from failed migrations and auto-deletes them |
-| 🪞 **Pull Mirror** | Creates Gitea pull-mirrors that auto-sync periodically |
-| ⚡ **Concurrent Workers** | Multi-threaded execution (configurable `MAX_WORKERS`) — N repos migrate in parallel |
-| ✅ **Strict Validation** | Only HTTP 201 = success. No guessing, no false positives |
-| 🚫 **Blocked Repo Detection** | Auto-detects GitHub 403 (DMCA/TOS) and skips cleanly |
-| 🌍 **Bilingual i18n** | Full English and 简体中文 interface |
-| 🔄 **Retry + Backoff** | Exponential backoff on 5xx and network errors |
-| 📊 **Execution Reports** | Markdown reports with timing, concurrency stats, auto-archived |
-| 📝 **Structured Logging** | Thread-safe dual output: console + timestamped log files |
-| 🐳 **Docker Ready** | Alpine-based image, Docker Compose, GitHub Actions CI/CD |
-| 🔐 **Secure by Design** | `.env` file for secrets, non-root Docker user |
-| 📁 **Auto-Rotation** | Old logs (max 30) and reports (max 50) automatically pruned |
-| ⚙️ **Graceful Shutdown** | Ctrl+C triggers clean exit — finishes in-flight tasks, generates report |
-| ⚡ **Zero Dependencies** | Pure Python 3 stdlib — no `pip install` needed |
+| **Auto-Discovery** | Scans all repos via GitHub API (owner + org + collaborator) |
+| **Incremental Sync** | Skips healthy repos on Gitea; auto-repairs broken mirrors |
+| **Mirror Health Check** | Detects empty shells from failed migrations and auto-deletes them |
+| **Pull Mirror** | Creates Gitea pull-mirrors that auto-sync periodically |
+| **Concurrent Workers** | Multi-threaded execution (configurable `MAX_WORKERS`) — N repos migrate in parallel |
+| **Strict Validation** | Only HTTP 201 = success. No guessing, no false positives |
+| **Blocked Repo Detection** | Auto-detects GitHub 403 (DMCA/TOS) and skips cleanly |
+| **Bilingual i18n** | Full English and 简体中文 interface |
+| **Retry + Backoff** | Exponential backoff on 5xx and network errors |
+| **Execution Reports** | Markdown reports with timing, concurrency stats, auto-archived |
+| **Structured Logging** | Thread-safe dual output: console + timestamped log files |
+| **Docker Ready** | Alpine-based image, Docker Compose, GitHub Actions CI/CD |
+| **Secure by Design** | `.env` file for secrets, non-root Docker user |
+| **Auto-Rotation** | Old logs (max 30) and reports (max 50) automatically pruned |
+| **Graceful Shutdown** | Ctrl+C triggers clean exit — finishes in-flight tasks, generates report |
+| **Zero Dependencies** | Pure Python 3 stdlib — no `pip install` needed |
 
 > **💡 v2.4.0 Highlights:** Strict GitHub Organization replication (PRESERVE_ORGS), `SYNC_NOW` for instant updates, and `FORCE_RECREATE` for full remigrations.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### 🚀 Which deployment is right for you?
+### Which deployment is right for you?
 
 | Method | Best for | Server needed? |
 |--------|----------|----------------|
-| 🐍 [Python](#option-1-run-directly-recommended-for-first-time) | First-time / quick test | Any machine with Python 3 |
-| 🐳 [Docker Compose](#option-2-docker-compose-recommended-for-persistent-deployment) | Self-hosted persistent | Docker host |
-| 📦 [Docker CLI](#option-3-docker-one-liner) | One-off containerized run | Docker host |
-| ☁️ [GitHub Actions](#option-4-github-actions-recommended-for-hands-free-automation) | Fully automated, no server | None (free) |
+| [Python](#option-1-run-directly-recommended-for-first-time) | First-time / quick test | Any machine with Python 3 |
+| [Docker Compose](#option-2-docker-compose-recommended-for-persistent-deployment) | Self-hosted persistent | Docker host |
+| [Docker CLI](#option-3-docker-one-liner) | One-off containerized run | Docker host |
+| [GitHub Actions](#option-4-github-actions-recommended-for-hands-free-automation) | Fully automated, no server | None (free) |
 
 ### Option 1: Run Directly (Recommended for first-time use)
 
@@ -164,7 +164,7 @@ schedule:
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 All configuration is done via environment variables. Copy `.env.example` to `.env` and fill in your values.
 
@@ -225,7 +225,7 @@ All configuration is done via environment variables. Copy `.env.example` to `.en
 
 ---
 
-## 📋 CLI Usage
+## CLI Usage
 
 ```
 usage: mirror.py [-h] [--lang {en,cn}] [--yes] [--include-orgs] [--dry-run]
@@ -267,7 +267,7 @@ python3 mirror.py --workers 10 --timeout 900
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 gitea-github-mirror/
@@ -290,7 +290,7 @@ gitea-github-mirror/
 
 ---
 
-## ⚡ Concurrency Model
+## Concurrency Model
 
 A core architectural decision of this tool.
 
@@ -329,7 +329,7 @@ location / {
 
 ---
 
-## 🔄 How It Works
+## How It Works
 
 ```mermaid
 sequenceDiagram
@@ -379,7 +379,7 @@ You push to GitHub ──> GitHub Repo
 
 ---
 
-## 📊 Execution Reports
+## Execution Reports
 
 After each run, a Markdown report is generated in the `reports/` directory:
 
@@ -417,7 +417,7 @@ Reports are **auto-rotated**: when the count exceeds `REPORT_MAX_COUNT` (default
 
 ---
 
-## 🐳 Docker
+## Docker
 
 ### Build Locally
 
@@ -451,7 +451,7 @@ Uncomment the `scheduler` service in `docker-compose.yml` to run mirrors on a cr
 
 ---
 
-## 📚 API Reference
+## API Reference
 
 This tool interacts with two REST APIs:
 
@@ -493,7 +493,7 @@ This tool interacts with two REST APIs:
 
 ---
 
-## 🛡️ Error Handling & Resilience
+## Error Handling & Resilience
 
 | Scenario | Behavior |
 |----------|----------|
@@ -512,7 +512,7 @@ This tool interacts with two REST APIs:
 | **Ctrl+C** | ⚠️ Graceful shutdown — finishes in-flight tasks, generates report |
 | **Post-failure** | 🧹 Auto-cleanup — deletes broken shell if Gitea created one before clone failed |
 
-### 🔧 Mirror Health Check (v2.2.0)
+### Mirror Health Check (v2.2.0)
 
 Gitea's migration API creates the database record **before** starting `git clone`. If the clone fails (DNS, timeout, DMCA 451), the repo record persists as a broken empty shell. This causes two problems:
 
@@ -529,7 +529,7 @@ Gitea's migration API creates the database record **before** starting `git clone
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 This project was built with inspiration and architectural insights from the following excellent open-source projects in the Gitea community:
 
@@ -542,6 +542,6 @@ We sincerely thank the authors of these projects for their contributions to the 
 
 ---
 
-## 📄 License
+## License
 
 [MIT](LICENSE) © 2026 [yuanweize](https://github.com/yuanweize)

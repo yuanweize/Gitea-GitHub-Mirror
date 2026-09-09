@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪞 Gitea GitHub Mirror
+# Gitea GitHub Mirror
 
 **将您 GitHub 上的所有仓库批量镜像到自建 Gitea 服务器 — 并发执行、严格校验、结果可靠。**
 
@@ -21,7 +21,7 @@
 
 ---
 
-## 📖 概述
+## 概述
 
 **Gitea GitHub Mirror** 是一个零依赖的 Python 命令行工具，可以自动发现您 GitHub 账号下的所有仓库（公开、私有、Fork、组织和协作者仓库），并在您自建的 [Gitea](https://gitea.io) 服务器上创建**拉取镜像 (Pull Mirror)**。
 
@@ -29,41 +29,41 @@
 
 ---
 
-## ✨ 核心特性
+## 核心特性
 
 | 特性 | 说明 |
 |------|------|
-| 🔍 **自动发现** | 通过 GitHub API 扫描所有仓库（个人 + 组织 + 协作者） |
-| 🧲 **增量同步** | 跳过健康镜像，自动检测并修复损坏的空壳镜像 |
-| 🔧 **镜像健康检查** | 检测迁移失败留下的空壳仓库并自动删除 |
-| 🪞 **拉取镜像** | 创建 Gitea Pull Mirror，定期自动从 GitHub 拉取更新 |
-| ⚡ **多线程并发** | 可配置 `MAX_WORKERS` 线程数，N 个仓库同时迁移 |
-| ✅ **严格校验** | 只有 HTTP 201 = 成功，绝不猜测、绝不误报 |
-| 🚫 **封锁仓库检测** | 自动识别 GitHub 403（DMCA/违规）并清晰跳过 |
-| 🌍 **双语界面** | 完整的英文和简体中文界面支持 |
-| 🔄 **自动重试** | 5xx 和网络错误自动指数退避重试 |
-| 📊 **执行报告** | 每次运行后生成 Markdown 报告（含并发统计、耗时、成功/失败明细） |
-| 📝 **结构化日志** | 线程安全的控制台 + 日志文件双输出 |
-| 🐳 **容器化** | Alpine Docker 镜像 + Docker Compose + GitHub Actions 自动构建 |
-| 🔐 **安全设计** | 敏感信息通过 `.env` 配置，Docker 非 root 用户运行 |
-| 📁 **自动轮转** | 日志（最多 30 个）和报告（最多 50 个）自动清理 |
-| ⚙️ **优雅关闭** | Ctrl+C 触发干净退出，完成当前任务后生成报告 |
-| ⚡ **零依赖** | 纯 Python 3 标准库，无需 `pip install` |
+| **自动发现** | 通过 GitHub API 扫描所有仓库（个人 + 组织 + 协作者） |
+| **增量同步** | 跳过健康镜像，自动检测并修复损坏的空壳镜像 |
+| **镜像健康检查** | 检测迁移失败留下的空壳仓库并自动删除 |
+| **拉取镜像** | 创建 Gitea Pull Mirror，定期自动从 GitHub 拉取更新 |
+| **多线程并发** | 可配置 `MAX_WORKERS` 线程数，N 个仓库同时迁移 |
+| **严格校验** | 只有 HTTP 201 = 成功，绝不猜测、绝不误报 |
+| **封锁仓库检测** | 自动识别 GitHub 403（DMCA/违规）并清晰跳过 |
+| **双语界面** | 完整的英文和简体中文界面支持 |
+| **自动重试** | 5xx 和网络错误自动指数退避重试 |
+| **执行报告** | 每次运行后生成 Markdown 报告（含并发统计、耗时、成功/失败明细） |
+| **结构化日志** | 线程安全的控制台 + 日志文件双输出 |
+| **容器化** | Alpine Docker 镜像 + Docker Compose + GitHub Actions 自动构建 |
+| **安全设计** | 敏感信息通过 `.env` 配置，Docker 非 root 用户运行 |
+| **自动轮转** | 日志（最多 30 个）和报告（最多 50 个）自动清理 |
+| **优雅关闭** | Ctrl+C 触发干净退出，完成当前任务后生成报告 |
+| **零依赖** | 纯 Python 3 标准库，无需 `pip install` |
 
 > **💡 v2.4.0 亮点：** 严格的 GitHub 组织架构镜像 (PRESERVE_ORGS)、`SYNC_NOW` 立即触发老仓库同步，以及 `FORCE_RECREATE` 强制删除重建。
 
 ---
 
-## 🚀 快速开始
+## 快速开始
 
-### 🚀 哪种部署方式适合你？
+### 哪种部署方式适合你？
 
 | 方式 | 适用场景 | 需要服务器？ |
 |------|----------|----------|
-| 🐍 [直接运行](#方式一直接运行推荐首次使用) | 首次使用 / 快速测试 | 任何有 Python 3 的机器 |
-| 🐳 [Docker Compose](#方式二docker-compose推荐持久化部署) | 自建服务器持久运行 | Docker 主机 |
-| 📦 [Docker 单行](#方式三docker-单行命令) | 一次性容器化运行 | Docker 主机 |
-| ☁️ [GitHub Actions](#方式四github-actions推荐全自动无人值守) | 全自动无服务器 | 无需（免费） |
+| [直接运行](#方式一直接运行推荐首次使用) | 首次使用 / 快速测试 | 任何有 Python 3 的机器 |
+| [Docker Compose](#方式二docker-compose推荐持久化部署) | 自建服务器持久运行 | Docker 主机 |
+| [Docker 单行](#方式三docker-单行命令) | 一次性容器化运行 | Docker 主机 |
+| [GitHub Actions](#方式四github-actions推荐全自动无人值守) | 全自动无服务器 | 无需（免费） |
 
 ### 方式一：直接运行（推荐首次使用）
 
@@ -166,7 +166,7 @@ schedule:
 
 ---
 
-## ⚙️ 配置说明
+## 配置说明
 
 所有配置通过环境变量完成。请将 `.env.example` 复制为 `.env` 并填入您的值。
 
@@ -227,7 +227,7 @@ schedule:
 
 ---
 
-## 📋 命令行参数
+## 命令行参数
 
 ```
 用法: mirror.py [-h] [--lang {en,cn}] [--yes] [--include-orgs] [--dry-run] [--timeout SECONDS]
@@ -265,7 +265,7 @@ python3 mirror.py --lang cn --workers 10 --timeout 900
 
 ---
 
-## 🏗️ 项目结构
+## 项目结构
 
 ```
 gitea-github-mirror/
@@ -289,7 +289,7 @@ gitea-github-mirror/
 
 ---
 
-## ⚡ 并发模型
+## 并发模型
 
 这是本工具最核心的架构设计。
 
@@ -328,7 +328,7 @@ location / {
 
 ---
 
-## 🔄 工作原理
+## 工作原理
 
 ```mermaid
 sequenceDiagram
@@ -378,7 +378,7 @@ sequenceDiagram
 
 ---
 
-## 📊 执行报告
+## 执行报告
 
 每次运行后，自动在 `reports/` 目录生成 Markdown 格式的执行报告：
 
@@ -408,7 +408,7 @@ sequenceDiagram
 
 ---
 
-## 🛡️ 错误处理策略
+## 错误处理策略
 
 | 场景 | 行为 |
 |------|------|
@@ -427,7 +427,7 @@ sequenceDiagram
 | **Ctrl+C** | ⚠️ 优雅关闭——完成当前任务后生成报告 |
 | **失败后** | 🧹 自动清理——如果 Gitea 在克隆失败前已创建空壳，自动删除 |
 
-### 🔧 镜像健康检查 (v2.2.0)
+### 镜像健康检查 (v2.2.0)
 
 Gitea 的迁移 API 会在执行 `git clone` **之前**就创建数据库记录。如果克隆失败（DNS、超时、DMCA 451），仓库记录会以空壳形式残留。这会导致两个问题：
 
@@ -444,7 +444,7 @@ Gitea 的迁移 API 会在执行 `git clone` **之前**就创建数据库记录�
 
 ---
 
-## 📚 API 参考
+## API 参考
 
 本工具调用两个 REST API：
 
@@ -465,7 +465,7 @@ Gitea 的迁移 API 会在执行 `git clone` **之前**就创建数据库记录�
 - Gitea API (Swagger)：https://docs.gitea.com/api/1.25/
 - Gitea 镜像功能文档：https://docs.gitea.com/usage/repo-mirror
 
-## 🙏 鸣谢 / Acknowledgements
+## 鸣谢 / Acknowledgements
 
 本项目的底层架构设计和部分核心灵感，深度借鉴并学习了 Gitea 社区中以下优秀的开源项目：
 
@@ -478,6 +478,6 @@ Gitea 的迁移 API 会在执行 `git clone` **之前**就创建数据库记录�
 
 ---
 
-## 📄 许可证
+## 许可证
 
 [MIT](LICENSE) © 2026 [yuanweize](https://github.com/yuanweize)
